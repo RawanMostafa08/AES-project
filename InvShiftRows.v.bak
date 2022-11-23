@@ -1,0 +1,544 @@
+module InvShiftRows(A,B);
+
+input  [127:0]A;
+output [127:0]B;
+
+assign B[127:120]=A[127:120];//15-->15
+assign B[119:112]=A[119:112];//14-->14
+assign B[111:104]=A[111:104];//13-->13
+assign B[103:96]=A[103:96];//12-->12 
+
+assign B[95:88]=A[71:64];//11-->8
+assign B[87:80]=A[95:88];//10-->11
+assign B[79:72]=A[88:80];//9-->10
+assign B[71:64]=A[79:72];//8-->9
+
+assign B[63:56]=A[47:40];//7-->5
+assign B[55:48]=A[39:32];//6-->4
+assign B[47:40]=A[63:56];//5-->7
+assign B[39:32]=A[55:48];//4-->6
+
+assign B[31:24]=A[23:16];//3-->2
+assign B[23:16]=A[15:8];//2-->1
+assign B[15:8]=A[7:0];//1-->0
+assign B[7:0]=A[31:24];//0-->3
+
+endmodule
+///////////////////////////////////////////
+module s_box_inv(input [7:0] i,output reg [7:0] o);
+
+  always @ ( i )
+    case (i)
+     8'h63 : o= 8'h00;
+     8'h7c : o= 8'h01;
+     8'h77 : o= 8'h02;
+     8'h7b : o= 8'h03;
+     8'hf2 : o= 8'h04;
+     8'h6b : o= 8'h05;
+     8'h6f : o= 8'h06;
+     8'hc5 : o= 8'h07;
+     8'h30 : o= 8'h08;
+     8'h01 : o= 8'h09;
+     8'h67 : o= 8'h0a;
+     8'h2b : o= 8'h0b;
+     8'hfe : o= 8'h0c;
+     8'hd7 : o= 8'h0d;
+     8'hab : o= 8'h0e;
+     8'h76 : o= 8'h0f;
+     8'hca : o= 8'h10;
+     8'h82 : o= 8'h11;
+     8'hc9 : o= 8'h12;
+     8'h7d : o= 8'h13;
+     8'hfa : o= 8'h14;
+     8'h59 : o= 8'h15;
+     8'h47 : o= 8'h16;
+     8'hf0 : o= 8'h17;
+     8'had : o= 8'h18;
+     8'hd4 : o= 8'h19;
+     8'ha2 : o= 8'h1a;
+     8'haf : o= 8'h1b;
+     8'h9c : o= 8'h1c;
+     8'ha4 : o= 8'h1d;
+     8'h72 : o= 8'h1e;
+     8'hc0 : o= 8'h1f;
+     8'hb7 : o= 8'h20;
+     8'hfd : o= 8'h21;
+     8'h93 : o= 8'h22;
+     8'h26 : o= 8'h23;
+     8'h36 : o= 8'h24;
+     8'h3f : o= 8'h25;
+     8'hf7 : o= 8'h26;
+     8'hcc : o= 8'h27;
+     8'h34 : o= 8'h28;
+     8'ha5 : o= 8'h29;
+     8'he5 : o= 8'h2a;
+     8'hf1 : o= 8'h2b;
+     8'h71 : o= 8'h2c;
+     8'hd8 : o= 8'h2d;
+     8'h31 : o= 8'h2e;
+     8'h15 : o= 8'h2f;
+     8'h04 : o= 8'h30;
+     8'hc7 : o= 8'h31;
+     8'h23 : o= 8'h32;
+     8'hc3 : o= 8'h33;
+     8'h18 : o= 8'h34;
+     8'h96 : o= 8'h35;
+     8'h05 : o= 8'h36;
+     8'h9a : o= 8'h37;
+     8'h07 : o= 8'h38;
+     8'h12 : o= 8'h39;
+     8'h80 : o= 8'h3a;
+     8'he2 : o= 8'h3b;
+     8'heb : o= 8'h3c;
+     8'h27 : o= 8'h3d;
+     8'hb2 : o= 8'h3e;
+     8'h75 : o= 8'h3f;
+     8'h09 : o= 8'h40;
+     8'h83 : o= 8'h41;
+     8'h2c : o= 8'h42;
+     8'h1a : o= 8'h43;
+     8'h1b : o= 8'h44;
+     8'h6e : o= 8'h45;
+     8'h5a : o= 8'h46;
+     8'ha0 : o= 8'h47;
+     8'h52 : o= 8'h48;
+     8'h3b : o= 8'h49;
+     8'hd6 : o= 8'h4a; 
+     8'hb3 : o= 8'h4b;
+     8'h29 : o= 8'h4c;
+     8'he3 : o= 8'h4d;
+     8'h2f : o= 8'h4e;
+     8'h84 : o= 8'h4f;
+     8'h53 : o= 8'h50;
+     8'hd1 : o= 8'h51;
+     8'h00 : o= 8'h52;
+     8'hed : o= 8'h53;
+     8'h20 : o= 8'h54;
+     8'hfc : o= 8'h55;
+     8'hb1 : o= 8'h56;
+     8'h5b : o= 8'h57;
+     8'h6a : o= 8'h58;
+     8'hcb : o= 8'h59;
+     8'hbe : o= 8'h5a;
+     8'h39 : o= 8'h5b;
+     8'h4a : o= 8'h5c;
+     8'h4c : o= 8'h5d;
+     8'h58 : o= 8'h5e;
+     8'hcf : o= 8'h5f;
+     8'hd0 : o= 8'h60;
+     8'hef : o= 8'h61;
+     8'haa : o= 8'h62;
+     8'hfb : o= 8'h63;
+     8'h43 : o= 8'h64;
+     8'h4d : o= 8'h65;
+     8'h33 : o= 8'h66;
+     8'h85 : o= 8'h67;
+     8'h45 : o= 8'h68;
+     8'hf9 : o= 8'h69;
+     8'h02 : o= 8'h6a;
+     8'h7f : o= 8'h6b;
+     8'h50 : o= 8'h6c;
+     8'h3c : o= 8'h6d;
+     8'h9f : o= 8'h6e;
+     8'ha8 : o= 8'h6f;
+     8'h51 : o= 8'h70;
+     8'ha3 : o= 8'h71;
+     8'h40 : o= 8'h72;
+     8'h8f : o= 8'h73;
+     8'h92 : o= 8'h74;
+     8'h9d : o= 8'h75;
+     8'h38 : o= 8'h76;
+     8'hf5 : o= 8'h77;
+     8'hbc : o= 8'h78;
+     8'hb6 : o= 8'h79;
+     8'hda : o= 8'h7a;
+     8'h21 : o= 8'h7b;
+     8'h10 : o= 8'h7c;
+     8'hff : o= 8'h7d;
+     8'hf3 : o= 8'h7e;
+     8'hd2 : o= 8'h7f;
+     8'hcd : o= 8'h80;
+     8'h0c : o= 8'h81;
+     8'h13 : o= 8'h82;
+     8'hec : o= 8'h83;
+     8'h5f : o= 8'h84;
+     8'h97 : o= 8'h85;
+     8'h44 : o= 8'h86;
+     8'h17 : o= 8'h87;
+     8'hc4 : o= 8'h88;
+     8'ha7 : o= 8'h89;
+     8'h7e : o= 8'h8a;
+     8'h3d : o= 8'h8b;
+     8'h64 : o= 8'h8c;
+     8'h5d : o= 8'h8d;
+     8'h19 : o= 8'h8e;
+     8'h73 : o= 8'h8f;
+     8'h60 : o= 8'h90;
+     8'h81 : o= 8'h91;
+     8'h4f : o= 8'h92;
+     8'hdc : o= 8'h93;
+     8'h22 : o= 8'h94;
+     8'h2a : o= 8'h95;
+     8'h90 : o= 8'h96;
+     8'h88 : o= 8'h97;
+     8'h46 : o= 8'h98;
+     8'hee : o= 8'h99;
+     8'hb8 : o= 8'h9a;
+     8'h14 : o= 8'h9b;
+     8'hde : o= 8'h9c;
+     8'h5e : o= 8'h9d;
+     8'h0b : o= 8'h9e;
+     8'hdb : o= 8'h9f;
+     8'he0 : o= 8'ha0;
+     8'h32 : o= 8'ha1;
+     8'h3a : o= 8'ha2;
+     8'h0a : o= 8'ha3;
+     8'h49 : o= 8'ha4;
+     8'h06 : o= 8'ha5;
+     8'h24 : o= 8'ha6;
+     8'h5c : o= 8'ha7;
+     8'hc2 : o= 8'ha8;
+     8'hd3 : o= 8'ha9;
+     8'hac : o= 8'haa;
+     8'h62 : o= 8'hab;
+     8'h91 : o= 8'hac;
+     8'h95 : o= 8'had;
+     8'he4 : o= 8'hae;
+     8'h79 : o= 8'haf;
+     8'he7 : o= 8'hb0;
+     8'hc8 : o= 8'hb1;
+     8'h37 : o= 8'hb2;
+     8'h6d : o= 8'hb3;
+     8'h8d : o= 8'hb4;
+     8'hd5 : o= 8'hb5;
+     8'h4e : o= 8'hb6;
+     8'ha9 : o= 8'hb7;
+     8'h6c : o= 8'hb8;
+     8'h56 : o= 8'hb9;
+     8'hf4 : o= 8'hba;
+     8'hea : o= 8'hbb;
+     8'h65 : o= 8'hbc;
+     8'h7a : o= 8'hbd;
+     8'hae : o= 8'hbe;
+     8'h08 : o= 8'hbf;
+     8'hba : o= 8'hc0;
+     8'h78 : o= 8'hc1;
+     8'h25 : o= 8'hc2;
+     8'h2e : o= 8'hc3;
+     8'h1c : o= 8'hc4;
+     8'ha6 : o= 8'hc5;
+     8'hb4 : o= 8'hc6;
+     8'hc6 : o= 8'hc7;
+     8'he8 : o= 8'hc8;
+     8'hdd : o= 8'hc9;
+     8'h74 : o= 8'hca;
+     8'h1f : o= 8'hcb;
+     8'h4b : o= 8'hcc;
+     8'hbd : o= 8'hcd;
+     8'h8b : o= 8'hce;
+     8'h8a : o= 8'hcf;
+     8'h70 : o= 8'hd0;
+     8'h3e : o= 8'hd1;
+     8'hb5 : o= 8'hd2;
+     8'h66 : o= 8'hd3;
+     8'h48 : o= 8'hd4;
+     8'h03 : o= 8'hd5;
+     8'hf6 : o= 8'hd6;
+     8'h0e : o= 8'hd7;
+     8'h61 : o= 8'hd8;
+     8'h35 : o= 8'hd9;
+     8'h57 : o= 8'hda;
+     8'hb9 : o= 8'hdb;
+     8'h86 : o= 8'hdc;
+     8'hc1 : o= 8'hdd;
+     8'h1d : o= 8'hde;
+     8'h9e : o= 8'hdf;
+     8'he1 : o= 8'he0;
+     8'hf8 : o= 8'he1;
+     8'h98 : o= 8'he2;
+     8'h11 : o= 8'he3;
+     8'h69 : o= 8'he4;
+     8'hd9 : o= 8'he5;
+     8'h8e : o= 8'he6;
+     8'h94 : o= 8'he7;
+     8'h9b : o= 8'he8;
+     8'h1e : o= 8'he9;
+     8'h87 : o= 8'hea;
+     8'he9 : o= 8'heb;
+     8'hce : o= 8'hec;
+     8'h55 : o= 8'hed;
+     8'h28 : o= 8'hee;
+     8'hdf : o= 8'hef;
+     8'h8c : o= 8'hf0;
+     8'ha1 : o= 8'hf1;
+     8'h89 : o= 8'hf2;
+     8'h0d : o= 8'hf3;
+     8'hbf : o= 8'hf4;
+     8'he6 : o= 8'hf5;
+     8'h42 : o= 8'hf6;
+     8'h68 : o= 8'hf7;
+     8'h41 : o= 8'hf8;
+     8'h99 : o= 8'hf9;
+     8'h2d : o= 8'hfa;
+     8'h0f : o= 8'hfb;
+     8'hb0 : o= 8'hfc;
+     8'h54 : o= 8'hfd;
+     8'hbb : o= 8'hfe;
+     8'h16 : o= 8'hff;
+  endcase
+endmodule 
+/////////////////////////////////////
+module inverseSubbytes(input [127:0]in,output [127:0]out);
+s_box_inv x1(in[127:120],out[127:120]);
+ 
+s_box_inv x2(in[119:112],out[119:112]);
+
+s_box_inv x3 (in[111:104],out[111:104]);
+
+s_box_inv x4(in[103:96],out[103:96]);
+ 
+s_box_inv x5(in[95:88],out[95:88]);
+
+s_box_inv x6(in[87:80],out[87:80]);
+ 
+s_box_inv x7(in[79:72],out[79:72]);
+
+s_box_inv x8(in[71:64],out[71:64]);
+
+s_box_inv x9(in[63:56],out[63:56]);
+
+s_box_inv x10(in[55:48],out[55:48]);
+
+s_box_inv x11(in[47:40],out[47:40]);
+ 
+s_box_inv x12(in[39:32],out[39:32]);
+ 
+s_box_inv x13(in[31:24],out[31:24]);
+ 
+s_box_inv x14(in[23:16],out[23:16]);
+
+s_box_inv x15(in[15:8],out[15:8]);
+
+s_box_inv x16(in[7:0],out[7:0]);
+endmodule
+////////////////////////////////////////////
+module InvMixColumns
+(
+input  [127:0] state,
+output wire [127:0] NewState
+);
+wire [127:0] out1;
+wire [127:0] out2;
+wire [127:0] out3;
+wire [127:0] out4;
+
+Invmultiply e1 (state[127:120],4'b1110,out1[127:120]);
+Invmultiply e2 (state[119:112],4'b1011,out1[119:112]);
+Invmultiply e3 (state[111:104],4'b1101,out1[111:104]);
+Invmultiply e4 (state[103:96], 4'b1001,out1[103:96]);
+assign NewState[127:120]=out1[127:120]^out1[119:112]^out1[111:104]^out1[103:96];  //e11
+
+Invmultiply e5 (state[127:120],4'b1001,out1[95:88]);
+Invmultiply e6 (state[119:112],4'b1110,out1[87:80] );
+Invmultiply e7 (state[111:104],4'b1011,out1[79:72] );
+Invmultiply e8 (state[103:96], 4'b1101,out1[71:64]);
+assign NewState[119:112]=out1[95:88]^out1[87:80]^out1[79:72]^out1[71:64];  //e21///////////////////
+
+Invmultiply e9 (state[127:120], 4'b1101,out1[63:56]);
+Invmultiply e10 (state[119:112],4'b1001,out1[55:48]);
+Invmultiply e11 (state[111:104],4'b1110,out1[47:40]);
+Invmultiply e12 (state[103:96], 4'b1011,out1[39:32]);
+assign NewState[111:104]=out1[63:56]^out1[55:48]^out1[47:40]^out1[39:32];  //e31
+
+Invmultiply e13 (state[127:120],4'b1011,out1[31:24]);
+Invmultiply e14 (state[119:112],4'b1101,out1[23:16]);
+Invmultiply e15 (state[111:104],4'b1001,out1[15:8]);
+Invmultiply e16 (state[103:96], 4'b1110,out1[7:0]);
+assign NewState[103:96]=out1[31:24]^out1[23:16]^out1[15:8]^out1[7:0];  //e41
+///////////////////////////////////////////////////////////////////////
+Invmultiply e17 (state[95:88],4'b1110,out2[127:120]); 
+Invmultiply e18 (state[87:80],4'b1011,out2[119:112]);
+Invmultiply e19 (state[79:72],4'b1101,out2[111:104]);
+Invmultiply e20 (state[71:64], 4'b1001,out2[103:96]);///
+assign NewState[95:88]=out2[127:120]^out2[119:112]^out2[111:104]^out2[103:96];  //e11
+
+Invmultiply e21 (state[95:88],4'b1001,out2[95:88]);
+Invmultiply e22 (state[87:80],4'b1110,out2[87:80] );
+Invmultiply e23 (state[79:72],4'b1011,out2[79:72] );
+Invmultiply e24 (state[71:64],4'b1101,out2[71:64]);/////
+assign NewState[87:80]=out2[95:88]^out2[87:80]^out2[79:72]^out2[71:64];  //e21///////////////////////////
+
+Invmultiply e25 (state[95:88],4'b1101,out2[63:56]);
+Invmultiply e26 (state[87:80],4'b1001,out2[55:48]);
+Invmultiply e27 (state[79:72],4'b1110,out2[47:40]);
+Invmultiply e28 (state[71:64],4'b1011,out2[39:32]);/////
+assign NewState[79:72]=out2[63:56]^out2[55:48]^out2[47:40]^out2[39:32];  //e31
+
+Invmultiply e29 (state[95:88],4'b1011,out2[31:24]);
+Invmultiply e30 (state[87:80],4'b1101,out2[23:16]);
+Invmultiply e31 (state[79:72],4'b1001,out2[15:8]);
+Invmultiply e32 (state[71:64],4'b1110,out2[7:0]);/////
+assign NewState[71:64]=out2[31:24]^out2[23:16]^out2[15:8]^out2[7:0];  //e41
+///////////////////////////////////////////////////////////////////////////
+Invmultiply e33 (state[63:56],4'b1110,out3[127:120]);
+Invmultiply e34 (state[55:48],4'b1011,out3[119:112]);
+Invmultiply e35 (state[47:40],4'b1101,out3[111:104]);
+Invmultiply e36 (state[39:32],4'b1001,out3[103:96]);
+assign NewState[63:56]=out3[127:120]^out3[119:112]^out3[111:104]^out3[103:96];  //e13
+
+Invmultiply e37 (state[63:56],4'b1001,out3[95:88]);
+Invmultiply e38 (state[55:48],4'b1110,out3[87:80] );
+Invmultiply e39 (state[47:40],4'b1011,out3[79:72] );
+Invmultiply e40 (state[39:32],4'b1101,out3[71:64] );
+assign NewState[55:48]=out3[95:88]^out3[87:80]^out3[79:72]^out3[71:64];  //e23/////////////////////////////
+
+Invmultiply e41 (state[63:56],4'b1101,out3[63:56]);
+Invmultiply e42 (state[55:48],4'b1001,out3[55:48]);
+Invmultiply e43 (state[47:40],4'b1110,out3[47:40]);
+Invmultiply e44 (state[39:32],4'b1011,out3[39:32]);
+assign NewState[47:40]=out3[63:56]^out3[55:48]^out3[47:40]^out3[39:32];  //e33
+
+Invmultiply e45 (state[63:56],4'b1011,out3[31:24]);
+Invmultiply e46 (state[55:48],4'b1101,out3[23:16]);
+Invmultiply e47 (state[47:40],4'b1001,out3[15:8] );
+Invmultiply e48 (state[39:32],4'b1110,out3[7:0]  );
+assign NewState[39:32]=out3[31:24]^out3[23:16]^out3[15:8]^out3[7:0];  //e43
+/////////////////////////////////////////////////////////////////////////
+Invmultiply e49 (state[31:24],4'b1110,out4[127:120]);
+Invmultiply e50 (state[23:16],4'b1011,out4[119:112]);
+Invmultiply e51 (state[15:8] ,4'b1101,out4[111:104]);
+Invmultiply e52 (state[7:0]  ,4'b1001,out4[103:96]);
+assign NewState[31:24]=out4[127:120]^out4[119:112]^out4[111:104]^out4[103:96];  //e14
+
+Invmultiply e53 (state[31:24],4'b1001,out4[95:88]);
+Invmultiply e54 (state[23:16],4'b1110,out4[87:80] );
+Invmultiply e55 (state[15:8] ,4'b1011,out4[79:72] ); 
+Invmultiply e56 (state[7:0]  ,4'b1101,out4[71:64] );
+assign NewState[23:16]=out4[95:88]^out4[87:80]^out4[79:72]^out4[71:64];  //e24   /////////////////////////////////////
+
+Invmultiply e57 (state[31:24],4'b1101,out4[63:56]);
+Invmultiply e58 (state[23:16],4'b1001,out4[55:48]);
+Invmultiply e59 (state[15:8] ,4'b1110,out4[47:40]);
+Invmultiply e60 (state[7:0]  ,4'b1011,out4[39:32]);
+assign NewState[15:8]=out4[63:56]^out4[55:48]^out4[47:40]^out4[39:32];  //e34
+
+Invmultiply e61 (state[31:24],4'b1011,out4[31:24]);
+Invmultiply e62 (state[23:16],4'b1101,out4[23:16]);
+Invmultiply e63 (state[15:8] ,4'b1001,out4[15:8]);
+Invmultiply e64 (state[7:0]  ,4'b1110,out4[7:0]);
+assign NewState[7:0]=out4[31:24]^out4[23:16]^out4[15:8]^out4[7:0];  //e44*/
+
+
+endmodule
+/////////////////////////////////
+module Invmultiply
+(
+input [7:0] in,
+input [3:0]x,
+output reg [7:0] out
+);
+reg [7:0] out1;
+reg [7:0] out2;
+reg [7:0] out3;
+always@(in,x)
+begin
+if (x==4'b1001)
+begin
+out1[7:0]={in[6:0],1'b0};
+if(in[7]==1'b1)
+out1=out1^8'b00011011;
+else 
+out1=out1;
+//x2
+out2[7:0]={out1[6:0],1'b0};
+if(out1[7]==1'b1)
+out2=out2^8'b00011011;
+else 
+out2=out2;
+//x2
+out3[7:0]={out2[6:0],1'b0};
+if(out2[7]==1'b1)
+out3=out3^8'b00011011;
+else 
+out3=out3;
+//x2
+out=out3^in;
+end
+else if(x==4'b1011)//b
+begin
+out1[7:0]={in[6:0],1'b0};
+if(in[7]==1'b1)
+out1=out1^8'b00011011;
+else 
+out1=out1;
+//x2
+out2[7:0]={out1[6:0],1'b0};
+if(out1[7]==1'b1)
+out2=out2^8'b00011011;
+else 
+out2=out2;
+//x2
+out2=out2^in;
+out3[7:0]={out2[6:0],1'b0};
+if(out2[7]==1'b1)
+out3=out3^8'b00011011;
+else 
+out3=out3;
+//x2
+out3=out3^in;
+out=out3;
+end
+
+else if(x==4'b1101)//d
+begin
+out1[7:0]={in[6:0],1'b0};
+if(in[7]==1'b1)
+out1=out1^8'b00011011;
+else 
+out1=out1;
+//x2
+out1=out1^in;
+out2[7:0]={out1[6:0],1'b0};
+if(out1[7]==1'b1)
+out2=out2^8'b00011011;
+else 
+out2=out2;
+//x2
+out3[7:0]={out2[6:0],1'b0};
+if(out2[7]==1'b1)
+out3=out3^8'b00011011;
+else 
+out3=out3;
+//x2
+out3=out3^in;
+out=out3;
+end
+
+else if(x==4'b1110)//e
+begin
+out1[7:0]={in[6:0],1'b0};
+if(in[7]==1'b1)
+out1=out1^8'b00011011;
+else 
+out1=out1;
+//x2
+out1=out1^in;
+out2[7:0]={out1[6:0],1'b0};
+if(out1[7]==1'b1)
+out2=out2^8'b00011011;
+else 
+out2=out2;
+//x2
+out2=out2^in;
+out3[7:0]={out2[6:0],1'b0};
+if(out2[7]==1'b1)
+out3=out3^8'b00011011;
+else 
+out3=out3;
+out=out3;
+end
+
+end
+
+endmodule
+//////////////////////////////////////////////////

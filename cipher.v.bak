@@ -1,0 +1,97 @@
+//module Cipher# (parameter mode=1)
+//(
+//input [127:0]plaintext,
+//input[255:0]key,
+//input clk,
+//input reset,
+//input enable,
+//output wire [127:0]out
+//);
+//wire [127:0] block[mode*2+8:0];
+//wire [127:0] block2[mode*2+8:0];
+//wire [127:0] block3[mode*2+8:0];
+//wire [127:0] block4[mode*2+8:0];
+//wire [255:0] key2[mode*2+8:0];
+//wire [255:0] key3;
+//wire [3:0] nr;
+//assign key2[1]=key;
+//assign block[1]=plaintext^key[255:128];
+//genvar i;
+//generate 
+//for (i=1; i<=mode*2+7; i=i+1)
+//begin : b1
+// subbytes c1 (block[i],block2[i]);
+// ShiftRows c2 (block2[i],block3[i]);
+// MixColumns c3 (block3[i],block4[i]);
+// 
+// keyexpansion c4 (key2[i],mode,i,key2[i+1]);
+// AddRoundKey c5 (block4[i],key2[i][255:128],block[i+1]);
+//
+//end
+//
+// subbytes c6 (block[mode*2+8],block2[mode*2+8]);
+// ShiftRows c7 (block2[mode*2+8],block3[mode*2+8]);
+// keyexpansion c8 (key2[mode*2+8],mode,nr,key3);
+// assign out=block3[mode*2+8]^key3[255:128];
+// //AddRoundKey c9 (block4[mode*2+8],key3[255:128],out);
+//
+// 
+//endgenerate
+////assign out=block;
+///*always@(clk)
+//begin 
+//if(reset==0)
+//begin
+//if(mode==2'b01)
+//begin
+//block=plaintext^key[255:128];
+//nr=4'b0001;
+//genvar i;
+//generate
+//for(i=0;i<10;i=i+1)
+//begin 
+//subbytes c1 (block,block2);
+//ShiftRows c2 (block2,block);
+//MixColumns c3 (block, block2);
+////keyexpansion1 c4 (key2[255:0],mode,nr,key3);
+//key2[255:0]=key3;
+//block=key3[255:128]^block2;
+//nr=nr+1'b1;
+//end
+//endgenerate*/
+//
+///*if(mode==2'b10)
+//begin
+//block=plaintext^key[255:128];
+//nr=4'b0001;
+//generate
+//for(i=1;i<=12;i=i+1)
+//begin 
+//subbytes c1 (block,block2);
+//ShiftRows c2 (block2,block);
+//MixColumns c3 (block, block2);
+////keyexpansion1 c4 (key2[255:0],mode,nr,key3);
+//key2[255:0]=key3;
+//block=key3[255:128]^block2;
+//nr=nr+1'b1;
+//end
+//endgenerate
+//end
+//if(mode==2'b11)
+//begin
+//block=plaintext^key[255:128];
+//nr=4'b0001;
+//generate
+//for(i=0;i<14;i=i+1)
+//begin 
+//subbytes c1 (block,block2);
+//ShiftRows c2 (block2,block);
+//MixColumns c3 (block, block2);
+////keyexpansion1 c4 (key2[255:0],mode,nr,key3);
+//key2[255:0]=key3;
+//block=key3[255:128]^block2;
+//nr=nr+1'b1;
+//end
+//endgenerate
+//end*/
+//endmodule

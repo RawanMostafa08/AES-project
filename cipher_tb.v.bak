@@ -1,0 +1,16 @@
+//module cipher_tb();
+//reg[127:0]plaintext;
+//reg[255:0]key;
+//reg[1:0]mode; //01>>128, 10>>192, 11>>>256
+////reg clk,
+////reg reset,
+////reg enable,
+//wire [127:0]out;
+//cipher uut(plaintext,key,mode,out);
+//initial begin
+//$monitor("%h",out);
+//plaintext=128'h00112233445566778899aabbccddeeff;
+//key=256'h000102030405060708090a0b0c0d0e0f;
+//mode=1;
+//end
+//endmodule

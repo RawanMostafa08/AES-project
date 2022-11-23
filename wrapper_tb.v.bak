@@ -1,0 +1,26 @@
+module wrapper_tb();
+
+reg clk;
+reg reset;
+reg enable;
+
+wire check[2:0];
+
+Wrapper w(clk,reset,enable,check[0],check[1],check[2]);
+
+always
+begin
+#50;
+clk=~clk;
+end
+
+initial begin
+
+clk=1;
+reset=1;
+enable=1;
+#50
+reset=0;
+end
+
+endmodule
